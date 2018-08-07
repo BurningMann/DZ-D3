@@ -1,15 +1,22 @@
 'use strict';
-var json = JSON.parse($.getJSON({
-	'url': "js/json.json",
-	'async': false
-}).responseText);
-console.log(json)
-let elemen
+
 let table = $("<table>")
 table.class = "tables"
-$("#testForm").append(table)
+$("#testForm").append(table) 
 
-function create(elemen) {
+
+$.get("data.json",
+function(obj){
+	console.log(obj);
+	create(obj.formDef1)
+		create(obj.formDef2) 
+}).fail(
+function(err){
+	console.log(`${err.status}-${err.statusText}`);
+});
+
+
+  function create(elemen) {
 	for (let k = 0; k < elemen.length; k++) {
 		let tr = $("<tr>")
 		table.append(tr)
@@ -80,5 +87,5 @@ function create(elemen) {
 		}
 	}
 }
-create(elemen = json.formDef1)
-create(elemen = json.formDef2)
+
+ 
